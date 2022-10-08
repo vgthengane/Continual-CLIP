@@ -1,0 +1,24 @@
+hydra:
+  run:
+    dir: ./experiments/${scenario}/${dataset}_${initial_increment}-${increment}
+  job:
+    chdir: true
+
+  job_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '%(message)s'
+
+class_order: ""
+dataset_root: ""
+workdir: ""
+log_path: "metrics.json"
+model_name: "ViT-B/16"
+prompt_template: "a bad photo of a {}."
+
+batch_size: 128
+increment: ${initial_increment}
+initial_increment: 5  
+scenario: "class"
+dataset: "cifar100"

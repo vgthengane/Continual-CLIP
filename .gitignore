@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# custom
+experiments/*
+run_cifar100.sh
+run_imagenet100.sh
+run_imagenet1000.sh
+run_tinyimagenet.sh
