@@ -86,4 +86,4 @@ If you have any questions, please create an issue on this repository or contact 
 
 ## Acknowledgements
 
-Our code is based on [DyTox](https://github.com/arthurdouillard/dytox) repository. We thank the authors for releasing their code. If you use our model and code, please consider citing these works as well.
+Our code is based on [DyTox](https://github.com/arthurdouillard/dytox) repository. We thank the authors for releasing their code.
