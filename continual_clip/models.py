@@ -9,7 +9,7 @@ import torch.nn as nn
 from .utils import get_class_ids_per_task, get_class_names
 
 
-class ClassIncremental(nn.Module):
+class ClassIncrementalCLIP(nn.Module):
     def __init__(self, cfg, device, jit=False):
         super().__init__()
         self.prompt_template = cfg.prompt_template
@@ -33,12 +33,28 @@ class ClassIncremental(nn.Module):
         ).to(self.device)
 
 
+class DomainIncrementalCLIP(nn.Module):
+    def __init__(self, cfg, device, jit=False) -> None:
+        super().__init__()
+        self.model, self.transforms = clip.load(cfg.model_name, device=device, jit=jit)
+        self.text_tokens = None
+        self.prompt_template = cfg.prompt_template
+        self.device = device
 
-class DomainIncremental(nn.Module):
-    pass
+    def forward(self, image):
+        with torch.no_grad():
+            logits_per_image, _ = self.model(image, self.text_tokens)
+            probs = logits_per_image.softmax(dim=-1).cpu().numpy()
+        return probs
+
+    def tokenize(self, class_names):
+        self.text_tokens = clip.tokenize(
+            [self.prompt_template.format(c) for c in class_names]
+        ).to(self.device)
 
 
-class TaskAgnostic(nn.Module):
+
+class TaskAgnosticCLIP(nn.Module):
     pass
 
 
@@ -54,11 +70,11 @@ def load_model(cfg: DictConfig, device: torch.device) -> nn.Module:
         nn.Module: Return scenario specific CLIP model.
     """
     if cfg.scenario == "class":
-        return ClassIncremental(cfg, device)
+        return ClassIncrementalCLIP(cfg, device)
     elif cfg.scenario == "domain":
-        return DomainIncremental(cfg, device)
+        return DomainIncrementalCLIP(cfg, device)
     elif cfg.scenario == "task-aganostic":
-        return TaskAgnostic(cfg, device)
+        return TaskAgnosticCLIP(cfg, device)
     else:
         raise ValueError(f"""
             `{cfg.scenarios}` is not a valid scenario, 

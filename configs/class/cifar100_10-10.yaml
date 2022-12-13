@@ -1,6 +1,6 @@
 hydra:
   run:
-    dir: ./experiments/${scenario}/${dataset}_${initial_increment}-${increment}
+    dir: ./experiments/${scenario}/${dataset}_${initial_increment}-${increment}_without_exp
   job:
     chdir: true
 

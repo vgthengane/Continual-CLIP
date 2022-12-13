@@ -1,0 +1,20 @@
+hydra:
+  run:
+    dir: ./experiments/${scenario}/${dataset}
+  job:
+    chdir: true
+
+  job_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '%(message)s'
+
+dataset_root: ""
+workdir: ""
+scenario: "domain"
+dataset: "core50"
+log_path: "log.json"
+model_name: "ViT-B/16"
+prompt_template: "a good photo of a {}."
+batch_size: 256

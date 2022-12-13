@@ -134,3 +134,5 @@ run_cifar100.sh
 run_imagenet100.sh
 run_imagenet1000.sh
 run_tinyimagenet.sh
+vit_nms*
+continual_clip_nms*
