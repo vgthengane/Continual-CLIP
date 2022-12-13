@@ -11,8 +11,10 @@
 
 
 ## :rocket: News
+* **(Dec 13, 2022)** 
+  * Released code for domain and task-agnostic settings.
 * **(Oct 08, 2022)** 
-  * Released code for [class incremental](configs/class) setting (other settings it will be added soon).
+  * Released code for [class incremental](configs/class) setting.
 * **(Oct 03, 2022)** 
   * Repository created.
 <hr />
